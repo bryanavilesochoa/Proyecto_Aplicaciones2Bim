@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Pacifico|Roboto+Condensed|Ubuntu" rel="stylesheet">
+
+    <title>Socrative</title>
+
+</head>
+
+<body>
+
+<header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><span class="text-primary"> Socrative</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+</header>
+<main style="background-color: #086f89  ;">
+    <div class="container mt-5" id="app">
+        <center><h2>{{titulo}}</h2></center>
+
+        <div class="d-flex align-items-center" id="botonesprincipales">
+
+            <button id="boton2" type="button" @click="seeVF = !seeVF" v-on:click="seeMO = false, seeRC = false, ag = true, ac=false">Crear Pregunta</button>
+        </div>
+        <center>
+            <main style="background-color: #086f89  ;">
+                <div v-if="seeVF" id="VF">
+                    <input class="form-control form-control-lg" type="text" placeholder="Ingrese Pregunta" v-model="ipregunta">
+                    <br>
+                    <select class="form-control" v-model="rValida" id="opciones">
+                        <option>Verdadero</option>
+                        <option>Falso</option>
+                    </select>
+                    <br>
+                    <button class="btn btn-primary" @click="VFOption" v-if="ag">Agregar</button>
+                    <button @click="actualizarTarea" class="btn btn-default" v-if="ac">Actualizar</button>
+                </div>
+        </center>
+
+        <div class="mt-3" v-for="(item, iindex) of cuestonario">
+            <div role="alert" :class="['alert', item.estado ? 'alert-success' : 'alert-danger']">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="">
+                        {{iindex}} - {{item.pregunta}} - {{item.valida}}
+                    </div>
+                    <div class="">
+                        <button class="btn btn-success btn-sm" @click="editarTarea(iindex)" v-on:click="ac=true, ag=false">Confirmar</button>
+                        <button class="btn btn-danger btn-sm" @click="eliminarTarea(iindex)">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
